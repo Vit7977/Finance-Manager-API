@@ -1,0 +1,29 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    container_name: mysqldb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: finance_manager
+      MYSQL_USER: api_user
+      MYSQL_PASSWORD: api_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+  
+  api:
+    image: node:22.17.0
+    container_name: api
+    restart: always
+    working_dir: /usr/src/api
+    volumes:
+      - ./src:/usr/src/api
+    depends_on:
+      - db
+    ports:
+      - "9090:9090"
+
+volumes:
+  db_data:
