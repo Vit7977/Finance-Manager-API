@@ -1,0 +1,22 @@
+USE finance_manager;
+DROP TRIGGER IF EXISTS usuario_updated_at;
+DELIMITER //
+CREATE TRIGGER IF NOT EXISTS usuario_update
+BEFORE UPDATE ON usuario
+FOR EACH ROW
+BEGIN
+    SET NEW.updated_at = NOW();
+END//
+DELIMITER ;
+
+
+DROP TRIGGER IF EXISTS meta_updated_at;
+
+DELIMITER //
+CREATE TRIGGER IF NOT EXISTS meta_updated_at
+BEFORE UPDATE ON meta
+FOR EACH ROW
+BEGIN
+    SET NEW.updated_at = NOW();
+END//
+DELIMITER ;

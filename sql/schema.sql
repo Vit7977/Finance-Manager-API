@@ -9,30 +9,36 @@ CREATE TABLE IF NOT EXISTS usuario(
     nome VARCHAR(30),
     email VARCHAR(155),
     senha VARCHAR(255),
-    cpf VARCHAR (11),
+    cpf VARCHAR(11) UNIQUE,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
 
 DROP TABLE IF EXISTS conta;
 CREATE TABLE IF NOT EXISTS conta(
     num INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
     usuario INT UNSIGNED,
     saldo DECIMAL(10, 2) DEFAULT 0,
-    tipo ENUM("banco", "dinheiro"),
+    tipo ENUM("instituicao", "dinheiro"),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario) REFERENCES usuario(id)
 ) AUTO_INCREMENT = 1000;
 
+
+
 DROP TABLE IF EXISTS categoria;
 CREATE TABLE IF NOT EXISTS categoria(
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    descricao VARCHAR(255),
-    tipo ENUM("despesa", "rendimento")
+    nome VARCHAR(255),
+    natureza ENUM("despesa", "rendimento")
 );
 
-DROP TABLE IF EXISTS transacao;
-CREATE TABLE IF NOT EXISTS transacao(
+
+
+DROP TABLE IF EXISTS lancamento;
+CREATE TABLE IF NOT EXISTS lancamento(
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
     usuario INT UNSIGNED NOT NULL,
     conta INT UNSIGNED NOT NULL,
@@ -44,6 +50,8 @@ CREATE TABLE IF NOT EXISTS transacao(
     FOREIGN KEY (conta) REFERENCES conta(num),
     FOREIGN KEY (categoria) REFERENCES categoria(id)
 );
+
+
 
 DROP TABLE IF EXISTS meta;
 CREATE TABLE IF NOT EXISTS meta(
