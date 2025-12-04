@@ -9,6 +9,7 @@ CREATE PROCEDURE IF NOT EXISTS conta_create(
     IN p_nome VARCHAR(30),
     IN p_email VARCHAR(155),
     IN p_senha VARCHAR(255),
+    IN p_data_nasc DATE,
     IN p_cpf VARCHAR(11),
     IN p_saldo DECIMAL(10, 2),
     IN p_tipo VARCHAR(30)
@@ -21,13 +22,14 @@ BEGIN
 
     START TRANSACTION;
 
-    INSERT INTO usuario(nome, email, senha, cpf) 
-    VALUES (p_nome, p_email, p_senha, p_cpf);
+    INSERT INTO usuario(nome, email, senha, data_nasc, cpf) 
+    VALUES (p_nome, p_email, p_senha, p_data_nasc, p_cpf);
 
     SET @user_id = LAST_INSERT_ID();
+    SET @account_num = @user_id + 1000;
 
-    INSERT INTO conta(usuario, saldo, tipo) 
-    VALUES (@user_id, p_saldo, p_tipo);
+    INSERT INTO conta(num, usuario, saldo, tipo) 
+    VALUES (@account_num, @user_id, p_saldo, p_tipo);
 
     COMMIT;
 END//

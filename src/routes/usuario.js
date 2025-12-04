@@ -5,9 +5,9 @@ const router = Router();
 
 router.get("/", UsuarioController.getAllUsers)
 
-router.post("/", (req, res)=>{
+router.post("/", UsuarioController.createConta)
 
-})
+router.post("/login", UsuarioController.login)
 
 router.put("/:id", (req, res)=>{
 

@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS usuario(
     nome VARCHAR(30),
     email VARCHAR(155),
     senha VARCHAR(255),
+    data_nasc DATE,
     cpf VARCHAR(11) UNIQUE,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -18,13 +19,14 @@ CREATE TABLE IF NOT EXISTS usuario(
 
 DROP TABLE IF EXISTS conta;
 CREATE TABLE IF NOT EXISTS conta(
-    num INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    num INT UNSIGNED PRIMARY KEY NOT NULL,
     usuario INT UNSIGNED,
     saldo DECIMAL(10, 2) DEFAULT 0,
     tipo ENUM("instituicao", "dinheiro"),
+    status ENUM("ativa", "inativa") DEFAULT "ativa",
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario) REFERENCES usuario(id)
-) AUTO_INCREMENT = 1000;
+);
 
 
 
