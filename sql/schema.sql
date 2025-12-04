@@ -65,3 +65,5 @@ CREATE TABLE IF NOT EXISTS meta(
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario) REFERENCES usuario(id)
 );
+
+INSERT INTO usuario (nome, email, senha, cpf) VALUES ("Jeferson", "jeferson123@gmail.com", "1234", 12345678910);
