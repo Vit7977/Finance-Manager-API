@@ -134,3 +134,56 @@ BEGIN
     COMMIT;
 END//
 DELIMITER ;
+
+-- META ------------------------------
+
+DROP PROCEDURE IF EXISTS meta_create;
+DELIMITER //
+CREATE PROCEDURE IF NOT EXISTS meta_create(
+    IN p_id_usuario INT,
+    IN p_nome VARCHAR(255),
+    IN p_descricao VARCHAR(255),
+    IN p_valor_alvo DECIMAL(10, 2),
+    IN p_prazo_final DATE
+)
+
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+
+    START TRANSACTION;
+
+    INSERT INTO meta(usuario, nome, descricao, valor_alvo, prazo_final)
+    VALUES (p_id_usuario, p_nome, p_descricao, p_valor_alvo, p_prazo_final);
+
+    COMMIT;
+END//
+DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS meta_update;
+DELIMITER //
+CREATE PROCEDURE IF NOT EXISTS meta_update(
+    IN p_id_usuario INT,
+    IN p_nome VARCHAR(255),
+    IN p_descricao VARCHAR(255),
+    IN p_valor_alvo DECIMAL(10, 2),
+    IN p_prazo_final DATE
+)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+
+    START TRANSACTION;
+
+    UPDATE meta SET nome = p_nome, descricao = p_descricao,
+    valor_alvo = p_valor_alvo, prazo_final = p_prazo_final;
+
+    COMMIT;
+END//
+DELIMITER ;
