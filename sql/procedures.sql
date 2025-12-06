@@ -11,8 +11,7 @@ CREATE PROCEDURE IF NOT EXISTS conta_create(
     IN p_senha VARCHAR(255),
     IN p_data_nasc DATE,
     IN p_cpf VARCHAR(11),
-    IN p_saldo DECIMAL(10, 2),
-    IN p_tipo VARCHAR(30)
+    IN p_saldo DECIMAL(10, 2)
 )
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -28,8 +27,8 @@ BEGIN
     SET @user_id = LAST_INSERT_ID();
     SET @account_num = @user_id + 1000;
 
-    INSERT INTO conta(num, usuario, saldo, tipo) 
-    VALUES (@account_num, @user_id, p_saldo, p_tipo);
+    INSERT INTO conta(num, usuario, saldo) 
+    VALUES (@account_num, @user_id, p_saldo);
 
     COMMIT;
 END//

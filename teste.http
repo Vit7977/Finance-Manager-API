@@ -1,6 +1,11 @@
-GET http://127.0.0.1:9099/api/category
+GET http://127.0.0.1:9099/api/account
 Content-Type: application/json
 
 {
-  
+    "nome": "João Silva",
+    "email": "joao.silva@example.com",
+    "senha": "senhaSegura123",
+    "data_nasc": "1990-05-15",
+    "cpf": "12345678901",
+    "saldo": 1500.75
 }

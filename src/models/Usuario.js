@@ -43,7 +43,7 @@ const Usuario = {
 
     async createAccount(data){
         try{
-            const result = await pool.promise().execute(`CALL conta_create(?, ?, ?, ?, ?, ?, ?);`, data);
+            const result = await pool.promise().execute(`CALL conta_create(?, ?, ?, ?, ?, ?);`, data);
 
             return result;
         }catch(error){

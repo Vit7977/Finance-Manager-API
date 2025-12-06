@@ -24,6 +24,5 @@ services:
     ports:
       - "9099:9099"
 
-
 volumes:
   db_data:

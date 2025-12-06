@@ -22,7 +22,6 @@ CREATE TABLE IF NOT EXISTS conta(
     num INT UNSIGNED PRIMARY KEY NOT NULL,
     usuario INT UNSIGNED,
     saldo DECIMAL(10, 2) DEFAULT 0,
-    tipo ENUM("instituicao", "dinheiro"),
     status ENUM("ativa", "inativa") DEFAULT "ativa",
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario) REFERENCES usuario(id)
@@ -47,6 +46,7 @@ CREATE TABLE IF NOT EXISTS lancamento(
     categoria INT UNSIGNED NOT NULL,
     descricao VARCHAR(255),
     valor DECIMAL(10, 2) NOT NULL,
+    tipo ENUM("dinheiro", "credito","debito", "PIX") NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario) REFERENCES usuario(id),
     FOREIGN KEY (conta) REFERENCES conta(num),

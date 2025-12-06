@@ -29,7 +29,7 @@ const UsuarioController = {
     },
 
     async createAccount(req, res) {
-        const { nome, email, senha, data_nasc, cpf, saldo, tipo_conta } = req.body;
+        const { nome, email, senha, data_nasc, cpf, saldo } = req.body;
 
         const hashedPass = await bcrypt.hash(senha, 10);
         
@@ -46,7 +46,7 @@ const UsuarioController = {
         try {
 
             const result = await Usuario.createAccount([
-                nome, email, hashedPass, data_nasc, cpf, saldo, tipo_conta
+                nome, email, hashedPass, data_nasc, cpf, saldo
             ]);
 
             res.status(201).json({
