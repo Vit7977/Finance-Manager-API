@@ -3,12 +3,14 @@ import LancamentoController from '../controllers/Lancamento.js'
 
 const router = Router();
 
-router.get("/", LancamentoController.getAllLaunchments);
+router.get("/", LancamentoController.getAllEntries);
+router.get("/:num_conta", LancamentoController.getEntriesByAccountNum);
+router.get("/:id", LancamentoController.getEntryById);
 
-router.post("/", (_, res) => {});
+router.post("/", LancamentoController.createEntry);
 
-router.put("/:id", (_, res) => {});
+router.put("/:id", LancamentoController.updateEntry);
 
-router.delete("/:id", (_, res) => {});
+router.delete("/:id", LancamentoController.deleteEntry);
 
 export default router;

@@ -46,7 +46,6 @@ CREATE TABLE IF NOT EXISTS lancamento(
     categoria INT UNSIGNED NOT NULL,
     descricao VARCHAR(255),
     valor DECIMAL(10, 2) NOT NULL,
-    tipo ENUM("dinheiro", "credito","debito", "PIX") NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario) REFERENCES usuario(id),
     FOREIGN KEY (conta) REFERENCES conta(num),
@@ -80,5 +79,3 @@ INSERT INTO categoria (nome, natureza) VALUES
 ("Investimentos", "faturamento"),
 ("Outros", "despesa"),
 ("Outros", "faturamento");
-
-INSERT INTO usuario (nome, email, senha, cpf) VALUES ("Jeferson", "jeferson123@gmail.com", "1234", 12345678910);

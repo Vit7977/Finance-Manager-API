@@ -18,7 +18,7 @@ api.use("/api/user", UserRouter);
 api.use("/api/account", AccountRouter);
 api.use("/api/account", AccountRouter);
 api.use("/api/category", CategoriaRouter);
-api.use("/api/launch", LancamentoRouter);
+api.use("/api/entry", LancamentoRouter);
 
 api.listen(PORT, ()=>{
     console.log(`API opened at http://localhost:${PORT}`);

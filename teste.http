@@ -1,11 +1,24 @@
-GET http://127.0.0.1:9099/api/user/12345678901
+DELETE http://127.0.0.1:9099/api/entry/1
 Content-Type: application/json
 
 {
-    "nome": "João",
-    "email": "joao.silva@example.com",
-    "senha": "senhaSegura123",
-    "data_nasc": "1990-05-15",
-    "cpf": "12345678901",
-    "saldo": 1500.75
+    "id_usuario": 1,
+    "num_conta": 1001,
+    "id_categoria": 7,
+    "descricao": "Salario Mes Dezembro",
+    "valor": 3205.25
 }
+
+
+
+# POST http://127.0.0.1:9099/api/user
+# Content-Type: application/json
+# 
+# {
+#   "nome":"Jeferson", 
+#   "email":"jeferson123@gmail.com", 
+#   "senha":"1234", 
+#   "data_nasc":"1983-01-29" ,
+#   "cpf":"12345678910", 
+#   "saldo":0.00
+# }

@@ -66,7 +66,7 @@ DROP PROCEDURE IF EXISTS lancamento_create;
 DELIMITER //
 CREATE PROCEDURE IF NOT EXISTS lancamento_create(
     IN p_id_usuario INT,
-    IN p_id_conta INT,
+    IN p_num_conta INT,
     IN p_id_categoria INT,
     IN p_descricao VARCHAR(255),
     IN p_valor DECIMAL(10, 2)
@@ -81,19 +81,8 @@ BEGIN
 
     START TRANSACTION;
 
-        SELECT natureza INTO v_natureza 
-        FROM categoria 
-        WHERE id = p_id_categoria;
-
         INSERT INTO lancamento(usuario, conta, categoria, descricao, valor)
-        VALUES (p_id_usuario, p_id_conta, p_id_categoria, p_descricao, p_valor);
-
-        IF v_natureza = "despesa" THEN
-            UPDATE conta SET saldo = saldo - p_valor WHERE id = p_id_conta;
-        ELSE
-            UPDATE conta SET saldo = saldo + p_valor WHERE id = p_id_conta;
-        END IF;
-
+        VALUES (p_id_usuario, p_num_conta, p_id_categoria, p_descricao, p_valor);
 
     COMMIT;
 END//
@@ -103,11 +92,10 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS lancamento_update;
 DELIMITER //
 CREATE PROCEDURE IF NOT EXISTS lancamento_update(
+    IN p_id_categoria INT,
     IN p_descricao VARCHAR(255),
     IN p_valor DECIMAL(10, 2),
-    IN p_id_lancamento INT,
-    IN p_id_conta INT,
-    IN p_id_categoria INT
+    IN p_id_lancamento INT
 )
 
 BEGIN
@@ -119,18 +107,8 @@ BEGIN
 
     START TRANSACTION;
 
-    SELECT natureza INTO v_natureza 
-    FROM categoria 
-    WHERE id = p_id_categoria;
-
-    UPDATE lancamento SET descricao = p_descricao, valor = p_valor 
+    UPDATE lancamento SET descricao = p_descricao, valor = p_valor, categoria = p_id_categoria
     WHERE lancamento.id = p_id_lancamento;
-
-    IF v_natureza = "despesa" THEN
-        UPDATE conta SET saldo = saldo - p_valor WHERE id = p_id_conta;
-    ELSE
-        UPDATE conta SET saldo = saldo + p_valor WHERE id = p_id_conta;
-    END IF;
 
     COMMIT;
 END//
