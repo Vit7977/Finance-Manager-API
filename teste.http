@@ -1,8 +1,8 @@
-GET http://127.0.0.1:9099/api/account
+GET http://127.0.0.1:9099/api/user/12345678901
 Content-Type: application/json
 
 {
-    "nome": "João Silva",
+    "nome": "João",
     "email": "joao.silva@example.com",
     "senha": "senhaSegura123",
     "data_nasc": "1990-05-15",
