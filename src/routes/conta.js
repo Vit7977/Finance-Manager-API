@@ -6,8 +6,6 @@ const router = Router();
 router.get("/", ContaController.getAllAccounts)
 router.get("/:num", ContaController.getAccountByNum)
 
-router.put("/:num", (req, res)=>{
-
-})
+router.put("/:num", ContaController.updateStatus)
 
 export default router;

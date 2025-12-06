@@ -4,6 +4,7 @@ import 'dotenv/config';
 
 import UserRouter from './routes/usuario.js'
 import AccountRouter from './routes/conta.js'
+import CategoriaRouter from './routes/categoria.js'
 
 const PORT = process.env.API_PORT;
 
@@ -14,6 +15,8 @@ api.use(cors());
 
 api.use("/api/user", UserRouter);
 api.use("/api/account", AccountRouter);
+api.use("/api/account", AccountRouter);
+api.use("/api/category", CategoriaRouter);
 
 api.listen(PORT, ()=>{
     console.log(`API opened at http://localhost:${PORT}`);

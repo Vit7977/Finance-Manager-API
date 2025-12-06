@@ -18,6 +18,16 @@ const Conta = {
         }catch(error){
             throw error;
         }
+    },
+
+    async updateStatus(data){
+        try{
+            const result = await pool.promise().execute(`UPDATE conta SET status = ? WHERE num = ?;`, data);
+
+            return result;
+        }catch(error){
+            throw error;
+        }
     }
 }
 

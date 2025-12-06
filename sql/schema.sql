@@ -34,7 +34,7 @@ DROP TABLE IF EXISTS categoria;
 CREATE TABLE IF NOT EXISTS categoria(
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
     nome VARCHAR(255),
-    natureza ENUM("despesa", "rendimento")
+    natureza ENUM("despesa", "faturamento")
 );
 
 
@@ -67,5 +67,18 @@ CREATE TABLE IF NOT EXISTS meta(
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario) REFERENCES usuario(id)
 );
+
+INSERT INTO categoria (nome, natureza) VALUES 
+("Alimentacao", "despesa"),
+("Transporte", "despesa"),
+("Saude", "despesa"),
+("Educacao", "despesa"),
+("Moradia", "despesa"),
+("Lazer", "despesa"),
+("Salario", "faturamento"),
+("Freelance", "faturamento"),
+("Investimentos", "faturamento"),
+("Outros", "despesa"),
+("Outros", "faturamento");
 
 INSERT INTO usuario (nome, email, senha, cpf) VALUES ("Jeferson", "jeferson123@gmail.com", "1234", 12345678910);

@@ -23,6 +23,23 @@ const ContaController = {
         }catch(error){
             res.status(500).json({message: "Erro ao buscar conta.", error: error.message});
         }
+    },
+
+    async updateStatus(req, res){
+        try{
+            const { num } = req.params;
+            const { status } = req.body;
+
+            const result = await Conta.updateStatus([status, num]);
+
+            if(result[0].affectedRows === 0){
+                return res.status(404).json({message: "Conta não encontrada."});
+            }
+
+            res.status(200).json({message: "account status updated successfully."});
+        }catch(error){
+            res.status(500).json({message: "Erro ao atualizar status da conta.", error: error.message});
+        }
     }
 }
 

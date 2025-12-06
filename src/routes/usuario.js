@@ -4,17 +4,14 @@ import UsuarioController from "../controllers/Usuario.js";
 const router = Router();
 
 router.get("/", UsuarioController.getAllUsers)
+router.get("/:cpf", UsuarioController.getUserByCPF)
 
-router.post("/", UsuarioController.createConta)
+router.post("/", UsuarioController.createAccount)
 
 router.post("/login", UsuarioController.login)
 
-router.put("/:id", (req, res)=>{
+router.put("/:id", UsuarioController.updateUser)
 
-})
-
-router.delete("/:id", (req, res)=>{
-
-})
+router.delete("/:id", UsuarioController.deleteUser)
 
 export default router;
