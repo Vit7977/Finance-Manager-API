@@ -9,6 +9,16 @@ const CategoriaController = {
         } catch (error) {
             throw error;
         }
+    },
+
+    async getNatureById(id) {
+        try {
+            const nature =  await pool.promise().execute('SELECT natureza FROM categoria WHERE id = ?;', [id]);
+
+            return nature[0];
+        } catch (error) {
+            throw error;
+        }
     }
 }
 

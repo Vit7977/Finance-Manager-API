@@ -28,6 +28,26 @@ const Conta = {
         }catch(error){
             throw error;
         }
+    },
+    
+    async updateSaldo(data){
+        try{
+            const result = await pool.promise().execute(`UPDATE conta SET saldo = ? WHERE num = ?;`, data);
+
+            return result;
+        }catch(error){
+            throw error;
+        }
+    },
+
+    async getAccountSaldo(num){
+        try{
+            const account = await pool.promise().execute(`SELECT saldo FROM conta WHERE num = ?;`, [num]);
+
+            return account[0];
+        }catch(error){
+            throw error;
+        }
     }
 }
 

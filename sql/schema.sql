@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS categoria;
 CREATE TABLE IF NOT EXISTS categoria(
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
     nome VARCHAR(255),
-    natureza ENUM("despesa", "faturamento")
+    natureza ENUM("despesa", "receita")
 );
 
 
@@ -74,8 +74,8 @@ INSERT INTO categoria (nome, natureza) VALUES
 ("Educacao", "despesa"),
 ("Moradia", "despesa"),
 ("Lazer", "despesa"),
-("Salario", "faturamento"),
-("Freelance", "faturamento"),
-("Investimentos", "faturamento"),
+("Salario", "receita"),
+("Freelance", "receita"),
+("Investimentos", "receita"),
 ("Outros", "despesa"),
-("Outros", "faturamento");
+("Outros", "receita");

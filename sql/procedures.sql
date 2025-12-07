@@ -146,11 +146,11 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS meta_update;
 DELIMITER //
 CREATE PROCEDURE IF NOT EXISTS meta_update(
-    IN p_id_usuario INT,
     IN p_nome VARCHAR(255),
     IN p_descricao VARCHAR(255),
     IN p_valor_alvo DECIMAL(10, 2),
-    IN p_prazo_final DATE
+    IN p_prazo_final DATE,
+    IN p_id_meta INT
 )
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -161,7 +161,8 @@ BEGIN
     START TRANSACTION;
 
     UPDATE meta SET nome = p_nome, descricao = p_descricao,
-    valor_alvo = p_valor_alvo, prazo_final = p_prazo_final;
+    valor_alvo = p_valor_alvo, prazo_final = p_prazo_final
+    WHERE id = p_id_meta;
 
     COMMIT;
 END//

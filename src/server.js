@@ -6,6 +6,7 @@ import UserRouter from './routes/usuario.js'
 import AccountRouter from './routes/conta.js'
 import CategoriaRouter from './routes/categoria.js'
 import LancamentoRouter from './routes/lancamento.js'
+import MetaRouter from './routes/meta.js'
 
 const PORT = process.env.API_PORT;
 
@@ -19,6 +20,7 @@ api.use("/api/account", AccountRouter);
 api.use("/api/account", AccountRouter);
 api.use("/api/category", CategoriaRouter);
 api.use("/api/entry", LancamentoRouter);
+api.use("/api/goal", MetaRouter);
 
 api.listen(PORT, ()=>{
     console.log(`API opened at http://localhost:${PORT}`);

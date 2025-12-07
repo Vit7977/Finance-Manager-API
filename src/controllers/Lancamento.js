@@ -1,4 +1,6 @@
 import Lancamento from '../models/Lancamento.js';
+import Conta from '../models/Conta.js';
+import Categoria from '../models/Categoria.js';
 
 const LancamentoController = {
     async getAllEntries(_, res){
@@ -39,14 +41,14 @@ const LancamentoController = {
         }
     },
 
-    async createEntry(req, res){
-        const { id_usuario, num_conta, id_categoria, descricao, valor } = req.body;
+    async createEntry(req, res) {
+        try {
+            const { id_usuario, num_conta, id_categoria, descricao, valor } = req.body;
 
-        if( !id_usuario || !num_conta || !id_categoria || !descricao || !valor ){
-            return  res.status(400).json({ message: "missing data!" });
-        }
+            if (!id_usuario || !num_conta || !id_categoria || !descricao || !valor) {
+                return res.status(400).json({ message: "missing data!" });
+            }
 
-        try{
             const entry = await Lancamento.createEntry([
                 id_usuario, num_conta, id_categoria, descricao, valor
             ]);
@@ -55,36 +57,39 @@ const LancamentoController = {
                 message: "entry created successfully!",
                 data: entry
             });
-        }catch(error){
+
+        } catch (error) {
             res.status(500).json(error);
         }
     },
 
-    async updateEntry(req, res){
-        const { id } = req.params;
-        const { descricao, valor, id_categoria } = req.body;
-        
-        if( !descricao || !valor || !id_categoria ){
-            return  res.status(400).json({ message: "missing data!" });
-        }
 
-        const entryExists = await Lancamento.getEntryById(id);
+    async updateEntry(req, res) {
+        try {
+            const { id } = req.params;
+            const { descricao, valor, id_categoria, num_conta } = req.body;
 
-        if(entryExists.length === 0){
-            return res.status(404).json({ message: "entry not found!" });
-        }
+            if (!descricao || !valor || !id_categoria || !num_conta) {
+                return res.status(400).json({ message: "missing data!" });
+            }
 
-        try{
             const entry = await Lancamento.updateEntry([
-                id_categoria, descricao, valor, id
+                id_categoria,
+                descricao,
+                valor,
+                id
             ]);
 
             res.status(200).json({
                 message: "entry updated successfully!",
                 data: entry
             });
-        }catch(error){
-            res.status(500).json(error);
+
+        } catch (error) {
+            res.status(500).json({
+                message: "server error",
+                error: error.message
+            });
         }
     },
 
