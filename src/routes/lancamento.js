@@ -4,7 +4,6 @@ import LancamentoController from '../controllers/Lancamento.js'
 const router = Router();
 
 router.get("/", LancamentoController.getAllEntries);
-router.get("/:num_conta", LancamentoController.getEntriesByAccountNum);
 router.get("/:id", LancamentoController.getEntryById);
 
 router.post("/", LancamentoController.createEntry);

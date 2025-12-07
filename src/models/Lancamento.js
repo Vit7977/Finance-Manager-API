@@ -64,7 +64,7 @@ const Lancamento = {
         }catch(error){
             throw error;
         }
-    }
+    },
 };
 
 export default Lancamento;

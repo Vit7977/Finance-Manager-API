@@ -30,9 +30,10 @@ const Conta = {
         }
     },
     
-    async updateSaldo(data){
+    async updateSaldo(newSaldo, num_conta){
         try{
-            const result = await pool.promise().execute(`UPDATE conta SET saldo = ? WHERE num = ?;`, data);
+            const result = await pool.promise().execute(`UPDATE conta SET saldo = ? WHERE num = ?;`, 
+                [newSaldo, num_conta]);
 
             return result;
         }catch(error){

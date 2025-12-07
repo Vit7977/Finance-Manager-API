@@ -91,15 +91,14 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS lancamento_update;
 DELIMITER //
-CREATE PROCEDURE IF NOT EXISTS lancamento_update(
+
+CREATE PROCEDURE lancamento_update(
     IN p_id_categoria INT,
     IN p_descricao VARCHAR(255),
-    IN p_valor DECIMAL(10, 2),
+    IN p_valor DECIMAL(10,2),
     IN p_id_lancamento INT
 )
-
 BEGIN
-    DECLARE v_natureza VARCHAR(20);
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
         ROLLBACK;
@@ -107,12 +106,18 @@ BEGIN
 
     START TRANSACTION;
 
-    UPDATE lancamento SET descricao = p_descricao, valor = p_valor, categoria = p_id_categoria
-    WHERE lancamento.id = p_id_lancamento;
+    UPDATE lancamento 
+        SET categoria = p_id_categoria,
+            descricao = p_descricao,
+            valor = p_valor
+    WHERE id = p_id_lancamento;
 
     COMMIT;
 END//
+
 DELIMITER ;
+
+
 
 -- META ------------------------------
 
