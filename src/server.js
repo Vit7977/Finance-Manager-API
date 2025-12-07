@@ -17,15 +17,14 @@ api.use(cors());
 
 api.use("/api/user", UserRouter);
 api.use("/api/account", AccountRouter);
-api.use("/api/account", AccountRouter);
 api.use("/api/category", CategoriaRouter);
 api.use("/api/entry", LancamentoRouter);
 api.use("/api/goal", MetaRouter);
 
-api.listen(PORT, ()=>{
-    console.log(`API opened at http://localhost:${PORT}`);
-})
-
 api.get("/", (_, res)=>{
     res.send("API FINANCE MANAGER!");
+})
+
+api.listen(PORT, ()=>{
+    console.log(`API opened at http://localhost:${PORT}`);
 })
